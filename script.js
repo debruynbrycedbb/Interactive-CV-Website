@@ -3,6 +3,8 @@
 (function () {
   "use strict";
 
+  if (window.scrollY > 0 && !location.hash) window.scrollTo({ top: 0, behavior: "instant" });
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ----------------------------------------------------------
@@ -545,16 +547,47 @@
   const embed = document.getElementById("portfolio-embed");
   const embedUrl = (embed.dataset.embed || "").trim();
   if (embedUrl) {
-    const iframe = document.createElement("iframe");
-    iframe.src = embedUrl;
-    iframe.title = "Photography portfolio";
-    iframe.loading = "lazy";
-    iframe.allow = "fullscreen; accelerometer; gyroscope";
-    embed.querySelector(".embed__frame").appendChild(iframe);
     embed.classList.add("has-embed");
     const cap = embed.querySelector(".embed__cap");
     cap.hidden = false;
     cap.querySelector("a").href = embedUrl;
+
+    // Only load the globe once its section is actually on screen. Loading it earlier
+    // let the embedded site grab focus and pull the page down to the portfolio.
+    const loadEmbed = () => {
+      if (embed.querySelector("iframe")) return;
+      const iframe = document.createElement("iframe");
+      iframe.src = embedUrl;
+      iframe.title = "Photography portfolio";
+      iframe.allow = "fullscreen; accelerometer; gyroscope";
+      // If the embedded site grabs focus on its own while loading, the browser scrolls to it.
+      // Undo only that jump: the page's own smooth scrolling and the visitor's scrolling are left alone.
+      let userMoved = false;
+      let lastY = window.scrollY;
+      const mark = () => { userMoved = true; };
+      ["wheel", "touchstart", "keydown", "mousedown"].forEach((ev) => window.addEventListener(ev, mark, { passive: true }));
+      const guard = () => {
+        if (document.activeElement === iframe && !userMoved) {
+          window.scrollTo({ top: lastY, behavior: "instant" });
+        } else {
+          lastY = window.scrollY;
+        }
+      };
+      window.addEventListener("scroll", guard, { passive: true });
+      setTimeout(() => {
+        window.removeEventListener("scroll", guard);
+        ["wheel", "touchstart", "keydown", "mousedown"].forEach((ev) => window.removeEventListener(ev, mark));
+      }, 6000);
+      embed.querySelector(".embed__frame").appendChild(iframe);
+    };
+    if ("IntersectionObserver" in window) {
+      const eio = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) { eio.disconnect(); loadEmbed(); }
+      }, { threshold: 0.15 });
+      eio.observe(embed);
+    } else {
+      loadEmbed();
+    }
   }
 
   /* ----------------------------------------------------------
