@@ -68,11 +68,11 @@
     <section class="journey" id="journey" aria-labelledby="journey-title">
       <div class="journey__head">
         <h2 id="journey-title">My journey</h2>
-        <p>Five countries, from primary school in Ghana to a bachelor's degree in the Netherlands.</p>
+        <p>Six countries, from where I was born in South Africa to a bachelor's degree in the Netherlands.</p>
       </div>
 
       <div class="journey__stage">
-        <div class="map" id="map" role="img" aria-label="World map showing the countries Bryce has lived and studied in: Ghana, Tanzania, Singapore, France and the Netherlands">
+        <div class="map" id="map" role="img" aria-label="World map showing the countries Bryce has lived and studied in: South Africa, Ghana, Tanzania, Singapore, France and the Netherlands">
           <svg id="map-svg"></svg>
           <p class="map__fallback" hidden>The map could not load. The timeline below lists every stop.</p>
         </div>
@@ -121,18 +121,19 @@
           <p>Photography &amp; Film. Filming and photographing for 6+ years</p>
         </div>
 
-        <!-- Set data-embed to the URL of the photography globe website to embed it here. -->
-        <figure class="embed" id="portfolio-embed" data-embed="">
+        <!-- data-embed holds the address of the photography globe website shown here. -->
+        <figure class="embed" id="portfolio-embed" data-embed="https://bdbphotography.site">
           <div class="embed__frame"></div>
           <div class="embed__fallback">
             <p class="embed__title">Photography &amp; film</p>
             <div class="embed__links">
-              <a class="btn btn--light" href="https://debruynbrycedbb.wixsite.com/bdbmedia" target="_blank" rel="noopener">Visit photography website</a>
+              <a class="btn btn--light" href="https://bdbphotography.site" target="_blank" rel="noopener">Visit bdbphotography.site</a>
               <a class="btn btn--ghost" href="https://www.youtube.com/channel/UCeXcJNQllnNcHZLAJu7wB2g" target="_blank" rel="noopener">Watch on YouTube</a>
             </div>
           </div>
           <figcaption class="embed__cap" hidden>
-            <a href="#" target="_blank" rel="noopener" id="embed-open">Open the portfolio in a new tab</a>
+            <span>bdbphotography.site</span>
+            <a class="btn btn--light" href="https://bdbphotography.site" target="_blank" rel="noopener" id="embed-open">Visit website in a new tab</a>
           </figcaption>
         </figure>
 
@@ -194,26 +195,22 @@
             <h3>Sustainability Project</h3>
             <p class="meta">Namibia — 1 month</p>
             <p>Collected funds, expanded a community library, painted a school, built an activity adventure playground, and taught English and Maths classes.</p>
-            <button class="pin" type="button" data-place="namibia">Show on map</button>
           </li>
           <li class="vol__item">
             <h3>Elephant Rehabilitation</h3>
             <p class="meta">Thailand</p>
             <p>Collaborated with local communities to raise awareness and care for at-risk elephants.</p>
-            <button class="pin" type="button" data-place="thailand">Show on map</button>
           </li>
           <li class="vol__item">
             <h3>Reforestation Project</h3>
             <p class="meta">Borneo</p>
             <p>Contributed to large-scale reforestation efforts on the island of Borneo.</p>
-            <button class="pin" type="button" data-place="borneo">Show on map</button>
           </li>
           <li class="vol__item">
             <h3>Charcoal Eradication Project</h3>
             <p class="meta">Tanzania</p>
             <p>Led fundraising and a deforestation exhibition; sponsored LPG equipment distribution to rural households.</p>
             <p>Also ran swimming sessions with local special needs children.</p>
-            <button class="pin" type="button" data-stop="1">Show on map</button>
           </li>
         </ul>
       </div>
@@ -233,7 +230,7 @@
               <p class="edu__school">Hogeschool Utrecht (HU University of Applied Sciences), Netherlands</p>
               <p>Focus: international marketing, media production and business innovation</p>
             </div>
-            <button class="pin" type="button" data-stop="4">Show on map</button>
+            <button class="pin" type="button" data-stop="5">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">Portsmouth University, England</p>
@@ -248,28 +245,28 @@
               <h3>IB Diploma (International Baccalaureate)</h3>
               <p class="edu__school">International School of Paris, France</p>
             </div>
-            <button class="pin" type="button" data-stop="3">Show on map</button>
+            <button class="pin" type="button" data-stop="4">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">2013 – 2017</p>
             <div>
               <h3>Secondary — International School of Singapore</h3>
             </div>
-            <button class="pin" type="button" data-stop="2">Show on map</button>
+            <button class="pin" type="button" data-stop="3">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">2010 – 2013</p>
             <div>
               <h3>Secondary — International School of Tanganyika, Tanzania</h3>
             </div>
-            <button class="pin" type="button" data-stop="1">Show on map</button>
+            <button class="pin" type="button" data-stop="2">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">2005 – 2010</p>
             <div>
               <h3>Primary — Lincoln International Community School, Ghana</h3>
             </div>
-            <button class="pin" type="button" data-stop="0">Show on map</button>
+            <button class="pin" type="button" data-stop="1">Show on map</button>
           </li>
         </ol>
       </div>
@@ -339,17 +336,12 @@
             <button class="copy" type="button" data-copy="debruynbryce2001@gmail.com">Copy</button>
           </li>
           <li>
-            <span class="contact__k">Phone</span>
-            <a href="tel:+31627451926">+31 6 27 45 19 26</a>
-            <button class="copy" type="button" data-copy="+31 6 27 45 19 26">Copy</button>
-          </li>
-          <li>
             <span class="contact__k">LinkedIn</span>
             <a href="https://www.linkedin.com/in/bryce-de-bruyn-876881226" target="_blank" rel="noopener">linkedin.com/in/bryce-de-bruyn-876881226</a>
           </li>
           <li>
             <span class="contact__k">Website</span>
-            <a href="https://debruynbrycedbb.wixsite.com/bdbmedia" target="_blank" rel="noopener">debruynbrycedbb.wixsite.com/bdbmedia</a>
+            <a href="https://bdbphotography.site" target="_blank" rel="noopener">bdbphotography.site</a>
           </li>
           <li>
             <span class="contact__k">YouTube</span>

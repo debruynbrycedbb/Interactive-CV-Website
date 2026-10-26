@@ -10,6 +10,11 @@
      ---------------------------------------------------------- */
   const STOPS = [
     {
+      id: "south-africa", country: "South Africa", years: "2001 – 2005", iso: "710",
+      coords: [28.05, -26.2], label: "right", short: "Where I was born",
+      items: [{ kind: "Born", title: "Born in South Africa in 2001" }]
+    },
+    {
       id: "ghana", country: "Ghana", years: "2005 – 2010", iso: "288",
       coords: [-0.19, 5.6], label: "below",
       items: [{ kind: "Primary", title: "Lincoln International Community School, Ghana" }]
@@ -114,8 +119,8 @@
 
   function cardIntro() {
     renderCard(`
-      <p class="stop-card__step"><span>Five stops</span><span>2005 – 2024</span></p>
-      <h3 class="stop-card__country">Ghana to the Netherlands</h3>
+      <p class="stop-card__step"><span>Six stops</span><span>2001 – 2024</span></p>
+      <h3 class="stop-card__country">South Africa to the Netherlands</h3>
       <p class="stop-card__desc" style="margin-top:.75rem">Press Explore My Journey to travel through each country in order, or choose a stop on the timeline.</p>`);
   }
 
@@ -138,8 +143,8 @@
 
   function cardEnd() {
     renderCard(`
-      <p class="stop-card__step"><span>Journey complete</span><span>2005 – 2024</span></p>
-      <h3 class="stop-card__country">Ghana to the Netherlands</h3>
+      <p class="stop-card__step"><span>Journey complete</span><span>2001 – 2024</span></p>
+      <h3 class="stop-card__country">South Africa to the Netherlands</h3>
       <ul class="stop-card__list">
         ${STOPS.map((s, i) => `<li><button type="button" class="pin" data-stop="${i}" style="color:var(--teal-on-dark)">${esc(s.country)}, ${esc(s.years)}</button></li>`).join("")}
       </ul>
@@ -157,7 +162,7 @@
           <span class="tl-stop__dot" aria-hidden="true"></span>
           <span class="tl-stop__years">${esc(s.years)}</span>
           <span class="tl-stop__country">${esc(s.country)}</span>
-          <span class="tl-stop__school">${esc(s.items[0].kind === "Primary" || s.items[0].kind === "Secondary" ? s.items[0].title : s.items[0].kind)}</span>
+          <span class="tl-stop__school">${esc(s.short || (s.items[0].kind === "Primary" || s.items[0].kind === "Secondary" ? s.items[0].title : s.items[0].kind))}</span>
         </button>
       </li>`).join("");
   const tlItems = Array.from(timelineEl.querySelectorAll(".tl-stop"));
@@ -240,11 +245,14 @@
     const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
     const { f } = availableRegion();
     const bw = x1 - x0, bh = y1 - y0;
-    const w = Math.max(bw / f, (bh * W) / H) * 1.28;
-    return [(x0 + x1) / 2, (y0 + y1) / 2, w];
+    // On wide screens the controls sit over the bottom of the map, so keep markers clear of them.
+    const ctl = document.querySelector(".map__controls");
+    const bottom = ctl && getComputedStyle(ctl).position === "absolute" ? ctl.offsetHeight + 28 : 0;
+    const w = Math.max(bw / f, (bh * W) / (H - bottom)) * 1.28;
+    return [(x0 + x1) / 2, (y0 + y1) / 2 + (bottom / 2) * (w / W), w];
   }
 
-  function stopView(i) { return pointViewFor(STOPS[i].coords, i === 2 ? 5200 : 6200); }
+  function stopView(i) { return pointViewFor(STOPS[i].coords, STOPS[i].id === "singapore" ? 5200 : 6200); }
 
   function flyTo(target, onTick) {
     return new Promise((resolve) => {
@@ -345,7 +353,7 @@
     updateTimeline(STOPS.length - 1);
     tlItems[STOPS.length - 1].classList.remove("is-active");
     tlItems[STOPS.length - 1].classList.add("is-visited");
-    tlProgress.style.width = "calc((100% - 2 * var(--gutter)) * 0.8)";
+    tlProgress.style.width = `calc((100% - 2 * var(--gutter)) * ${(STOPS.length - 1) / STOPS.length})`;
     if (!mapReady) { setPlacesVisible(true); return; }
     gStops.selectAll(".stop-dot").classed("is-active", false).classed("is-visited", true);
     STOPS.forEach((s) => { const c = countryById.get(s.iso); if (c) d3.select(c).classed("is-active", false).classed("is-visited", true); });
