@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bryce de Bruyn | Creative Business &amp; Marketing</title>
+  <meta name="description" content="Interactive CV of Bryce de Bruyn, Creative Business &amp; Marketing. Bringing together creative thinking, visual storytelling, and an international perspective to build meaningful marketing experiences.">
+  <meta property="og:title" content="Bryce de Bruyn | Creative Business &amp; Marketing">
+  <meta property="og:description" content="Bringing together creative thinking, visual storytelling, and an international perspective to build meaningful marketing experiences.">
+  <meta property="og:image" content="assets/headshot.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' text-anchor='middle' fill='%23f2f1ee'%3EBdB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <a class="nav__mark" href="#hero" aria-label="Bryce de Bruyn, back to top">BdB</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#journey">Journey</a>
+      <a href="#profile">Profile</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav__cv" href="assets/Bryce_de_Bruyn_CV.pdf" download="Bryce_de_Bruyn_CV.pdf">Download CV</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <a href="#journey">Journey</a>
+    <a href="#profile">Profile</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="assets/Bryce_de_Bruyn_CV.pdf" download="Bryce_de_Bruyn_CV.pdf">Download CV</a>
+  </div>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__photo">
+        <img src="assets/headshot.jpg" alt="Portrait of Bryce de Bruyn" width="896" height="1200" fetchpriority="high">
+      </div>
+      <div class="hero__text">
+        <p class="hero__role">Creative Business &amp; Marketing</p>
+        <h1 class="hero__name">Bryce<br>de Bruyn</h1>
+        <p class="hero__lede">Bringing together creative thinking, visual storytelling, and an international perspective to build meaningful marketing experiences.</p>
+        <div class="hero__actions">
+          <a class="btn btn--light" href="#journey" data-action="explore">Explore My Journey</a>
+          <a class="btn btn--ghost" href="#work">View My Work</a>
+          <a class="btn btn--ghost" href="assets/Bryce_de_Bruyn_CV.pdf" download="Bryce_de_Bruyn_CV.pdf">Download CV</a>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#journey" aria-label="Scroll to my journey"><span></span></a>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="journey" id="journey" aria-labelledby="journey-title">
+      <div class="journey__head">
+        <h2 id="journey-title">My journey</h2>
+        <p>Five countries, from primary school in Ghana to a bachelor's degree in the Netherlands.</p>
+      </div>
+
+      <div class="journey__stage">
+        <div class="map" id="map" role="img" aria-label="World map showing the countries Bryce has lived and studied in: Ghana, Tanzania, Singapore, France and the Netherlands">
+          <svg id="map-svg"></svg>
+          <p class="map__fallback" hidden>The map could not load. The timeline below lists every stop.</p>
+        </div>
+
+        <article class="stop-card" id="stop-card" aria-live="polite">
+          <!-- filled by script.js -->
+        </article>
+
+        <div class="map__controls">
+          <button class="ctl ctl--play" type="button" id="play">
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="i-play"><path d="M4 2.5v11l9-5.5z"/></svg>
+            <svg viewBox="0 0 16 16" aria-hidden="true" class="i-pause"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>
+            <span>Explore My Journey</span>
+          </button>
+          <button class="ctl" type="button" id="prev" aria-label="Previous stop">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.5 3 5.5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <button class="ctl" type="button" id="next" aria-label="Next stop">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5.5 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <label class="ctl ctl--toggle">
+            <input type="checkbox" id="elsewhere">
+            <span>Show projects &amp; studies elsewhere</span>
+          </label>
+        </div>
+      </div>
+
+      <ol class="timeline" id="timeline" aria-label="Timeline">
+        <!-- filled by script.js -->
+      </ol>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="section section--paper" id="profile" aria-labelledby="profile-title">
+      <div class="wrap profile">
+        <h2 id="profile-title">Profile</h2>
+        <p class="profile__text">A globally-minded Creative Business graduate (Hogeschool Utrecht) with a lifelong passion for cross-cultural communication and visual media. Having grown up and studied across Africa, Asia and Europe, I bring a rare international perspective to marketing and brand strategy. I am seeking a marketing or communications internship where I can contribute fresh creative thinking and a deep understanding of global audiences.</p>
+      </div>
+    </section>
+
+    <!-- WORK / PORTFOLIO -->
+    <section class="section section--dark" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="work-title">Creative portfolio</h2>
+          <p>Photography &amp; Film. Filming and photographing for 6+ years</p>
+        </div>
+
+        <!-- Set data-embed to the URL of the photography globe website to embed it here. -->
+        <figure class="embed" id="portfolio-embed" data-embed="">
+          <div class="embed__frame"></div>
+          <div class="embed__fallback">
+            <p class="embed__title">Photography &amp; film</p>
+            <div class="embed__links">
+              <a class="btn btn--light" href="https://debruynbrycedbb.wixsite.com/bdbmedia" target="_blank" rel="noopener">Visit photography website</a>
+              <a class="btn btn--ghost" href="https://www.youtube.com/channel/UCeXcJNQllnNcHZLAJu7wB2g" target="_blank" rel="noopener">Watch on YouTube</a>
+            </div>
+          </div>
+          <figcaption class="embed__cap" hidden>
+            <a href="#" target="_blank" rel="noopener" id="embed-open">Open the portfolio in a new tab</a>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section section--paper" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="experience-title">Work experience</h2>
+        </div>
+        <ol class="entries">
+          <li class="entry">
+            <div class="entry__head">
+              <h3>Freelance Photographer &amp; Videographer</h3>
+              <p class="meta">Ongoing</p>
+            </div>
+            <ul class="entry__body bullets">
+              <li>Promotional video for a boat charter company in Kenya — including aerial drone and underwater footage <button class="pin pin--inline" type="button" data-place="kenya">Show on map</button></li>
+              <li>Collaboration on ISP School promotional video</li>
+              <li>Various creative videos produced for <a href="https://www.youtube.com/channel/UCeXcJNQllnNcHZLAJu7wB2g" target="_blank" rel="noopener">YouTube channel</a></li>
+              <li>Photoshoots for student households</li>
+            </ul>
+          </li>
+          <li class="entry">
+            <div class="entry__head">
+              <h3>B2B Marketing — Occasional Assignments</h3>
+              <p class="meta">TotalEnergies</p>
+            </div>
+            <p class="entry__body">School and vacation-based assignments providing broad exposure to B2B marketing topics.</p>
+          </li>
+          <li class="entry">
+            <div class="entry__head">
+              <h3>Marketing &amp; Communications Intern</h3>
+              <p class="meta">Oikocredit — 6 months</p>
+            </div>
+            <p class="entry__body">Edited, formatted and published quarterly and financial reports. Carried out a wide range of day-to-day marketing and communications tasks.</p>
+          </li>
+          <li class="entry">
+            <div class="entry__head">
+              <h3>Communications Intern in the Financial Department</h3>
+              <p class="meta">ING Bank — 6 months</p>
+            </div>
+            <p class="entry__body">Worked with the financial team to streamline communications within the department, which included reorganising the access to the sharepoint, distrobuting communications changes to employees, and managing communications between departments.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- VOLUNTEER -->
+    <section class="section section--paper section--tight" id="volunteer" aria-labelledby="volunteer-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="volunteer-title">Volunteer experience</h2>
+        </div>
+        <ul class="vol">
+          <li class="vol__item">
+            <h3>Sustainability Project</h3>
+            <p class="meta">Namibia — 1 month</p>
+            <p>Collected funds, expanded a community library, painted a school, built an activity adventure playground, and taught English and Maths classes.</p>
+            <button class="pin" type="button" data-place="namibia">Show on map</button>
+          </li>
+          <li class="vol__item">
+            <h3>Elephant Rehabilitation</h3>
+            <p class="meta">Thailand</p>
+            <p>Collaborated with local communities to raise awareness and care for at-risk elephants.</p>
+            <button class="pin" type="button" data-place="thailand">Show on map</button>
+          </li>
+          <li class="vol__item">
+            <h3>Reforestation Project</h3>
+            <p class="meta">Borneo</p>
+            <p>Contributed to large-scale reforestation efforts on the island of Borneo.</p>
+            <button class="pin" type="button" data-place="borneo">Show on map</button>
+          </li>
+          <li class="vol__item">
+            <h3>Charcoal Eradication Project</h3>
+            <p class="meta">Tanzania</p>
+            <p>Led fundraising and a deforestation exhibition; sponsored LPG equipment distribution to rural households.</p>
+            <p>Also ran swimming sessions with local special needs children.</p>
+            <button class="pin" type="button" data-stop="1">Show on map</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section section--white" id="education" aria-labelledby="education-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="education-title">Education</h2>
+        </div>
+        <ol class="edu">
+          <li class="edu__item">
+            <p class="edu__years">2019 – 2024</p>
+            <div>
+              <h3>Bachelor's — Creative Business</h3>
+              <p class="edu__school">Hogeschool Utrecht (HU University of Applied Sciences), Netherlands</p>
+              <p>Focus: international marketing, media production and business innovation</p>
+            </div>
+            <button class="pin" type="button" data-stop="4">Show on map</button>
+          </li>
+          <li class="edu__item">
+            <p class="edu__years">Portsmouth University, England</p>
+            <div>
+              <h3>Additional Studies — Film &amp; Photography</h3>
+            </div>
+            <button class="pin" type="button" data-place="england">Show on map</button>
+          </li>
+          <li class="edu__item">
+            <p class="edu__years">2017 – 2019</p>
+            <div>
+              <h3>IB Diploma (International Baccalaureate)</h3>
+              <p class="edu__school">International School of Paris, France</p>
+            </div>
+            <button class="pin" type="button" data-stop="3">Show on map</button>
+          </li>
+          <li class="edu__item">
+            <p class="edu__years">2013 – 2017</p>
+            <div>
+              <h3>Secondary — International School of Singapore</h3>
+            </div>
+            <button class="pin" type="button" data-stop="2">Show on map</button>
+          </li>
+          <li class="edu__item">
+            <p class="edu__years">2010 – 2013</p>
+            <div>
+              <h3>Secondary — International School of Tanganyika, Tanzania</h3>
+            </div>
+            <button class="pin" type="button" data-stop="1">Show on map</button>
+          </li>
+          <li class="edu__item">
+            <p class="edu__years">2005 – 2010</p>
+            <div>
+              <h3>Primary — Lincoln International Community School, Ghana</h3>
+            </div>
+            <button class="pin" type="button" data-stop="0">Show on map</button>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SKILLS & LANGUAGES -->
+    <section class="section section--paper" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="skills-title">Skills</h2>
+        </div>
+        <div class="skills">
+          <div class="skills__col">
+            <h3>Professional</h3>
+            <ul class="chips">
+              <li>International marketing &amp; branding</li>
+              <li>Media production (Photo &amp; Film)</li>
+              <li>Content creation &amp; storytelling</li>
+              <li>Market research &amp; consumer insight</li>
+              <li>Digital media &amp; technology literacy</li>
+            </ul>
+          </div>
+          <div class="skills__col">
+            <h3>Personal</h3>
+            <ul class="chips">
+              <li>Adaptable &amp; culturally aware</li>
+              <li>Strong interpersonal skills</li>
+              <li>Creative thinker</li>
+              <li>Multilingual communicator (EN native, FR intermediate)</li>
+              <li>Self-motivated and independent</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="sub" id="languages">Languages</h3>
+        <ul class="langs">
+          <li><span class="langs__name">English</span><span class="langs__lvl">Native / Full professional</span></li>
+          <li><span class="langs__name">French</span><span class="langs__lvl">High school / Intermediate</span></li>
+          <li><span class="langs__name">Spanish</span><span class="langs__lvl">Beginner (actively learning)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section class="section section--white section--tight" id="interests" aria-labelledby="interests-title">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 id="interests-title">Personal interests</h2>
+        </div>
+        <ul class="interests">
+          <li><h3>Photography &amp; Film</h3><p>Filming and photographing for 6+ years</p></li>
+          <li><h3>Sports</h3><p>Basketball, Swimming, Cricket, Ultimate Frisbee</p></li>
+          <li><h3>Cryptocurrency &amp; Stock Trading</h3><p>Learning and actively trading since 2017</p></li>
+          <li><h3>Technology</h3><p>Keen interest in telecoms, aeronautics and emerging tech</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact__inner">
+        <h2 id="contact-title">Get in touch</h2>
+        <ul class="contact__list">
+          <li>
+            <span class="contact__k">Email</span>
+            <a href="mailto:debruynbryce2001@gmail.com">debruynbryce2001@gmail.com</a>
+            <button class="copy" type="button" data-copy="debruynbryce2001@gmail.com">Copy</button>
+          </li>
+          <li>
+            <span class="contact__k">Phone</span>
+            <a href="tel:+31627451926">+31 6 27 45 19 26</a>
+            <button class="copy" type="button" data-copy="+31 6 27 45 19 26">Copy</button>
+          </li>
+          <li>
+            <span class="contact__k">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/bryce-de-bruyn-876881226" target="_blank" rel="noopener">linkedin.com/in/bryce-de-bruyn-876881226</a>
+          </li>
+          <li>
+            <span class="contact__k">Website</span>
+            <a href="https://debruynbrycedbb.wixsite.com/bdbmedia" target="_blank" rel="noopener">debruynbrycedbb.wixsite.com/bdbmedia</a>
+          </li>
+          <li>
+            <span class="contact__k">YouTube</span>
+            <a href="https://www.youtube.com/channel/UCeXcJNQllnNcHZLAJu7wB2g" target="_blank" rel="noopener">youtube.com/channel/UCeXcJNQllnNcHZLAJu7wB2g</a>
+          </li>
+        </ul>
+        <div class="contact__actions">
+          <a class="btn btn--light" href="assets/Bryce_de_Bruyn_CV.pdf" download="Bryce_de_Bruyn_CV.pdf">Download CV</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/bryce-de-bruyn-876881226" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+      </div>
+      <footer class="wrap foot-wrap">
+        <div class="foot">
+          <p>Bryce de Bruyn</p>
+          <a href="#hero">Back to top</a>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/vendor/d3.min.js"></script>
+  <script src="assets/vendor/topojson-client.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
