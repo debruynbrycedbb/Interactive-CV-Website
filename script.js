@@ -624,6 +624,40 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
 
   /* ----------------------------------------------------------
+     Cookie consent banner (Microsoft Clarity)
+     ---------------------------------------------------------- */
+  const consent = document.getElementById("consent");
+  const CONSENT_KEY = "cv-consent";
+  const CONSENT_MAX_AGE = 182 * 864e5; // about 6 months
+
+  function storedConsent() {
+    try {
+      const c = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null");
+      return c && Date.now() - c.t < CONSENT_MAX_AGE ? c.v : null;
+    } catch (_) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ v: value, t: Date.now() })); } catch (_) {}
+    if (typeof window.clarity === "function") {
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: value });
+    }
+    consent.hidden = true;
+  }
+  if (consent) {
+    if (!storedConsent()) consent.hidden = false;
+    consent.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-consent]");
+      if (b) setConsent(b.dataset.consent);
+    });
+    const settings = document.getElementById("cookie-settings");
+    if (settings) settings.addEventListener("click", () => {
+      consent.style.animation = "none";
+      consent.hidden = false;
+      consent.querySelector('[data-consent="' + (storedConsent() === "granted" ? "denied" : "granted") + '"]').focus({ preventScroll: true });
+    });
+  }
+
+  /* ----------------------------------------------------------
      Copy buttons
      ---------------------------------------------------------- */
   const toast = document.getElementById("toast");

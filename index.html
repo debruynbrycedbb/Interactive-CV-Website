@@ -27,6 +27,18 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "z3x0nr6vm4");
   </script>
+  <script>
+    /* Cookie consent for Clarity. Until a visitor accepts, Clarity runs without cookies
+       (its consent-denied mode). A choice is remembered for 6 months, then asked again. */
+    (function () {
+      var granted = false;
+      try {
+        var c = JSON.parse(localStorage.getItem("cv-consent") || "null");
+        granted = !!(c && c.v === "granted" && Date.now() - c.t < 182 * 864e5);
+      } catch (e) {}
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: granted ? "granted" : "denied" });
+    })();
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -370,11 +382,23 @@
       <footer class="wrap foot-wrap">
         <div class="foot">
           <p>Bryce de Bruyn</p>
-          <a href="#hero">Back to top</a>
+          <div class="foot__links">
+            <button class="foot__btn" type="button" id="cookie-settings">Cookie settings</button>
+            <a href="#hero">Back to top</a>
+          </div>
         </div>
       </footer>
     </section>
   </main>
+
+  <section class="consent" id="consent" aria-labelledby="consent-title" hidden>
+    <h2 class="consent__title" id="consent-title">Cookies</h2>
+    <p class="consent__text">This site uses Microsoft Clarity to see how visitors use it, such as clicks, scrolling and time spent. Clarity only sets cookies if you accept. <a href="https://www.microsoft.com/privacy/privacystatement" target="_blank" rel="noopener">Microsoft's privacy statement</a></p>
+    <div class="consent__actions">
+      <button class="btn btn--ghost consent__btn" type="button" data-consent="denied">Decline</button>
+      <button class="btn btn--light consent__btn" type="button" data-consent="granted">Accept</button>
+    </div>
+  </section>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
