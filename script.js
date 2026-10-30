@@ -46,12 +46,21 @@
       items: [{ kind: "IB Diploma (International Baccalaureate)", title: "International School of Paris, France" }]
     },
     {
-      id: "netherlands", country: "Netherlands", years: "2019 – 2024", iso: "528",
+      id: "netherlands", country: "Netherlands", years: "2019 – 2025", iso: "528",
       coords: [5.12, 52.09], label: "rightUp",
       items: [{
         kind: "Bachelor's — Creative Business",
         title: "Hogeschool Utrecht (HU University of Applied Sciences), Netherlands",
         desc: ["Focus: international marketing, media production and business innovation"]
+      }]
+    },
+    {
+      id: "spain", country: "Spain", years: "2026 – 2027", iso: "724",
+      coords: [2.17, 41.39], label: "right", short: "Master's — Digital Marketing and Social Media",
+      items: [{
+        kind: "Master's — Digital Marketing and Social Media",
+        title: "LaSalle University, Barcelona, Spain",
+        desc: ["Currently studying in Barcelona"]
       }]
     }
   ];
@@ -121,8 +130,8 @@
 
   function cardIntro() {
     renderCard(`
-      <p class="stop-card__step"><span>Six stops</span><span>2001 – 2024</span></p>
-      <h3 class="stop-card__country">South Africa to the Netherlands</h3>
+      <p class="stop-card__step"><span>Seven stops</span><span>2001 – 2027</span></p>
+      <h3 class="stop-card__country">South Africa to Spain</h3>
       <p class="stop-card__desc" style="margin-top:.75rem">Press Explore My Journey to travel through each country in order, or choose a stop on the timeline.</p>`);
   }
 
@@ -145,9 +154,9 @@
 
   function cardEnd() {
     renderCard(`
-      <p class="stop-card__step"><span>Journey complete</span><span>2001 – 2024</span></p>
-      <h3 class="stop-card__country">South Africa to the Netherlands</h3>
-      <ul class="stop-card__list">
+      <p class="stop-card__step"><span>Journey complete</span><span>2001 – 2027</span></p>
+      <h3 class="stop-card__country">South Africa to Spain</h3>
+      <ul class="stop-card__list stop-card__list--compact">
         ${STOPS.map((s, i) => `<li><button type="button" class="pin" data-stop="${i}" style="color:var(--teal-on-dark)">${esc(s.country)}, ${esc(s.years)}</button></li>`).join("")}
       </ul>
       <p class="stop-card__desc" style="margin-top:1rem">The outlined dots mark projects and studies in other countries. Select one to read more.</p>`);
