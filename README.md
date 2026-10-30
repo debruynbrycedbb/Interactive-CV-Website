@@ -1,6 +1,6 @@
 # Interactive CV — Bryce de Bruyn
 
-A single-page interactive CV: an animated world map of my journey (South Africa → Ghana → Tanzania → Singapore → France → the Netherlands), my creative portfolio, work and volunteer experience, education, skills and contact details.
+A single-page interactive CV: an animated world map of my journey (South Africa → Ghana → Tanzania → Singapore → France → the Netherlands), my creative portfolio, past projects (EasyA bachelor's thesis), work and volunteer experience, education, skills and contact details.
 
 Plain HTML, CSS and JavaScript — no build step. Open `index.html` through any static server, or view it on GitHub Pages.
 
@@ -10,9 +10,14 @@ Plain HTML, CSS and JavaScript — no build step. Open `index.html` through any 
 - `styles.css` — design
 - `script.js` — journey map, timeline, menu and copy buttons
 - `assets/headshot.jpg` — homepage photo
+- `assets/easya-logo.png` — logo for the EasyA project in Past Projects
 - `assets/Bryce_de_Bruyn_CV.pdf` — the file behind every "Download CV" button
 - `assets/vendor/` — D3, TopoJSON and the world map data (stored locally so the map works offline)
 
 ## Photography globe
 
 The portfolio section embeds https://bdbphotography.site. To change it, edit `data-embed` on `id="portfolio-embed"` in `index.html`.
+
+## Past Projects
+
+The EasyA project embeds https://debruynbrycedbb.github.io/EasyA-DAO-Re-make/index.html. Edit `data-embed` on the `embed--project` figure in `index.html` to change it.

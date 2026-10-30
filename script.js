@@ -544,21 +544,24 @@
   /* ----------------------------------------------------------
      Portfolio embed
      ---------------------------------------------------------- */
-  const embed = document.getElementById("portfolio-embed");
-  const embedUrl = (embed.dataset.embed || "").trim();
-  if (embedUrl) {
+  // Every <figure class="embed" data-embed="..."> on the page (photography globe, past projects).
+  document.querySelectorAll("figure.embed[data-embed]").forEach((embed) => {
+    const embedUrl = (embed.dataset.embed || "").trim();
+    if (!embedUrl) return;
     embed.classList.add("has-embed");
     const cap = embed.querySelector(".embed__cap");
-    cap.hidden = false;
-    cap.querySelector("a").href = embedUrl;
+    if (cap) {
+      cap.hidden = false;
+      cap.querySelector("a").href = embedUrl;
+    }
 
-    // Only load the globe once its section is actually on screen. Loading it earlier
-    // let the embedded site grab focus and pull the page down to the portfolio.
+    // Only load the site once its section is actually on screen. Loading it earlier
+    // let the embedded site grab focus and pull the page down to it.
     const loadEmbed = () => {
       if (embed.querySelector("iframe")) return;
       const iframe = document.createElement("iframe");
       iframe.src = embedUrl;
-      iframe.title = "Photography portfolio";
+      iframe.title = embed.dataset.title || "Photography portfolio";
       iframe.allow = "fullscreen; accelerometer; gyroscope";
       // If the embedded site grabs focus on its own while loading, the browser scrolls to it.
       // Undo only that jump: the page's own smooth scrolling and the visitor's scrolling are left alone.
@@ -588,7 +591,7 @@
     } else {
       loadEmbed();
     }
-  }
+  });
 
   /* ----------------------------------------------------------
      Nav: solid background on scroll, current section, mobile menu
@@ -606,7 +609,7 @@
         navLinks.forEach((a) => a.classList.toggle("is-current", a.getAttribute("href") === `#${en.target.id}`));
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
-    ["journey", "profile", "work", "experience", "education", "skills", "contact"].forEach((id) => {
+    ["journey", "profile", "work", "projects", "experience", "education", "skills", "contact"].forEach((id) => {
       const el = document.getElementById(id); if (el) io.observe(el);
     });
   }
