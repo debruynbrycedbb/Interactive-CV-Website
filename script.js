@@ -38,12 +38,28 @@
     {
       id: "singapore", country: "Singapore", years: "2013 – 2017", iso: "702",
       coords: [103.82, 1.35], label: "right",
-      items: [{ kind: "Secondary", title: "International School of Singapore" }]
+      items: [
+        { kind: "Secondary", title: "International School of Singapore" },
+        {
+          kind: "Volunteer experience — Thailand", title: "Elephant Rehabilitation",
+          desc: ["Collaborated with local communities to raise awareness and care for at-risk elephants."]
+        },
+        {
+          kind: "Volunteer experience — Borneo", title: "Reforestation Project",
+          desc: ["Contributed to large-scale reforestation efforts on the island of Borneo."]
+        }
+      ]
     },
     {
       id: "france", country: "France", years: "2017 – 2019", iso: "250",
       coords: [2.35, 48.86], label: "left",
-      items: [{ kind: "IB Diploma (International Baccalaureate)", title: "International School of Paris, France" }]
+      items: [
+        { kind: "IB Diploma (International Baccalaureate)", title: "International School of Paris, France" },
+        {
+          kind: "Volunteer experience — Namibia, 1 month", title: "Sustainability Project",
+          desc: ["Collected funds, expanded a community library, painted a school, built an activity adventure playground, and taught English and Maths classes."]
+        }
+      ]
     },
     {
       id: "netherlands", country: "Netherlands", years: "2019 – 2025", iso: "528",
@@ -53,6 +69,11 @@
         title: "Hogeschool Utrecht (HU University of Applied Sciences), Netherlands",
         desc: ["Focus: international marketing, media production and business innovation"]
       }]
+    },
+    {
+      id: "england", country: "England", years: "2021 – 2022", iso: "826",
+      coords: [-1.09, 50.8], label: "above", short: "Additional Studies — Film & Photography",
+      items: [{ kind: "Additional Studies — Film & Photography", title: "Portsmouth University, England" }]
     },
     {
       id: "spain", country: "Spain", years: "2026 – 2027", iso: "724",
@@ -66,11 +87,6 @@
   ];
 
   const PLACES = [
-    {
-      id: "england", country: "England", iso: "826",
-      coords: [-1.09, 50.8], label: "left",
-      items: [{ kind: "Additional Studies — Film & Photography", title: "Portsmouth University, England" }]
-    },
     {
       id: "kenya", country: "Kenya", iso: "404",
       coords: [37.91, 0.18], label: "right",
@@ -130,7 +146,7 @@
 
   function cardIntro() {
     renderCard(`
-      <p class="stop-card__step"><span>Seven stops</span><span>2001 – 2027</span></p>
+      <p class="stop-card__step"><span>Eight stops</span><span>2001 – 2027</span></p>
       <h3 class="stop-card__country">South Africa to Spain</h3>
       <p class="stop-card__desc" style="margin-top:.75rem">Press Explore My Journey to travel through each country in order, or choose a stop on the timeline.</p>`);
   }
@@ -166,7 +182,6 @@
      Timeline
      ---------------------------------------------------------- */
   timelineEl.innerHTML =
-    `<span class="timeline__progress" aria-hidden="true"></span>` +
     STOPS.map((s, i) => `
       <li class="tl-stop" data-i="${i}">
         <button type="button" aria-label="${esc(s.country)}, ${esc(s.years)}">
@@ -177,7 +192,6 @@
         </button>
       </li>`).join("");
   const tlItems = Array.from(timelineEl.querySelectorAll(".tl-stop"));
-  const tlProgress = timelineEl.querySelector(".timeline__progress");
 
   function updateTimeline(i) {
     tlItems.forEach((li, j) => {
@@ -185,11 +199,16 @@
       li.classList.toggle("is-visited", i >= 0 && j < i);
       li.querySelector("button").setAttribute("aria-current", j === i ? "step" : "false");
     });
-    const pct = i <= 0 ? 0 : i / STOPS.length;
-    tlProgress.style.width = `calc((100% - 2 * var(--gutter)) * ${pct})`;
     const active = tlItems[i];
     if (active && timelineEl.scrollWidth > timelineEl.clientWidth) {
-      timelineEl.scrollTo({ left: active.offsetLeft - timelineEl.offsetLeft - 16, behavior: reduceMotion ? "auto" : "smooth" });
+      // Scroll the timeline sideways only when the current stop is out of view.
+      const pad = parseFloat(getComputedStyle(timelineEl).paddingLeft) || 0;
+      const left = active.offsetLeft - pad;
+      const right = active.offsetLeft + active.offsetWidth + pad;
+      const viewL = timelineEl.scrollLeft, viewR = viewL + timelineEl.clientWidth;
+      if (left < viewL || right > viewR) {
+        timelineEl.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? "auto" : "smooth" });
+      }
     }
   }
 
@@ -217,13 +236,32 @@
     return { ox: 0.5, f: 1 };
   }
 
-  function apply(v) {
-    view = v;
+  let zoomer = null;                       // d3.zoom behaviour: lets visitors drag and zoom the map
+
+  // Convert a view [x, y, w] to the screen transform and back.
+  function transformFor(v) {
     const { ox } = availableRegion();
-    k = W / v[2];
-    const tx = W * ox - v[0] * k;
-    const ty = H / 2 - v[1] * k;
-    root.attr("transform", `translate(${tx},${ty}) scale(${k})`);
+    const kk = W / v[2];
+    return d3.zoomIdentity.translate(W * ox - v[0] * kk, H / 2 - v[1] * kk).scale(kk);
+  }
+  function viewFor(t) {
+    const { ox } = availableRegion();
+    return [(W * ox - t.x) / t.k, (H / 2 - t.y) / t.k, W / t.k];
+  }
+
+  function apply(v) {
+    // Route every change through the zoom behaviour so its state always matches what's on screen.
+    d3.select(svgEl).call(zoomer.transform, transformFor(v));
+  }
+
+  function render(t) {
+    root.attr("transform", t);
+    view = viewFor(t);
+    restyle(t.k);
+  }
+
+  function restyle(scale) {
+    k = scale;
     // Keep strokes and markers a constant size on screen.
     gCountries.selectAll("path").attr("stroke-width", 0.6 / k);
     gRoutes.selectAll("path").attr("stroke-width", 2 / k);
@@ -238,6 +276,7 @@
       if (pos === "left") { dx = -off; anchor = "end"; }
       if (pos === "below") { dx = 0; dy = off + fs * 0.9; anchor = "middle"; }
       if (pos === "rightUp") { dx = off * 0.8; dy = -off * 0.6; }
+      if (pos === "above") { dx = 0; dy = -off * 0.8; anchor = "middle"; }
       t.attr("font-size", fs).attr("dx", dx).attr("dy", dy).attr("text-anchor", anchor).attr("stroke-width", 3 / k);
     });
   }
@@ -263,7 +302,7 @@
     return [(x0 + x1) / 2, (y0 + y1) / 2 + (bottom / 2) * (w / W), w];
   }
 
-  function stopView(i) { return pointViewFor(STOPS[i].coords, STOPS[i].id === "singapore" ? 5200 : 6200); }
+  function stopView(i) { return pointViewFor(STOPS[i].coords, ({ singapore: 5200, england: 4200 })[STOPS[i].id] || 6200); }
 
   function flyTo(target, onTick) {
     return new Promise((resolve) => {
@@ -354,7 +393,7 @@
     cardPlace(p);
     if (!mapReady) return;
     markPlace(id);
-    await flyTo(pointViewFor(p.coords, id === "england" ? 4200 : 6800));
+    await flyTo(pointViewFor(p.coords, 6800));
   }
 
   async function showEnd() {
@@ -364,7 +403,6 @@
     updateTimeline(STOPS.length - 1);
     tlItems[STOPS.length - 1].classList.remove("is-active");
     tlItems[STOPS.length - 1].classList.add("is-visited");
-    tlProgress.style.width = `calc((100% - 2 * var(--gutter)) * ${(STOPS.length - 1) / STOPS.length})`;
     if (!mapReady) { setPlacesVisible(true); return; }
     gStops.selectAll(".stop-dot").classed("is-active", false).classed("is-visited", true);
     STOPS.forEach((s) => { const c = countryById.get(s.iso); if (c) d3.select(c).classed("is-active", false).classed("is-visited", true); });
@@ -481,6 +519,66 @@
     d3.select(svgEl).attr("viewBox", `0 0 ${W} ${H}`);
   }
 
+  /* Visitors can drag to move and zoom the map. Doing so pauses the tour.
+     The scroll wheel only zooms after the map has been clicked (or with Ctrl/pinch),
+     so scrolling down the page never gets stuck on the map. On touch screens one finger
+     still scrolls the page; two fingers move and zoom the map. */
+  let mapActive = false;
+  let hintTimer;
+  function showHint(text) {
+    const hint = mapEl.querySelector(".map__hint");
+    hint.textContent = text;
+    hint.classList.add("is-on");
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(() => hint.classList.remove("is-on"), 1800);
+  }
+  function scaleLimits() { return [W / (REF_W * 1.4), W / 25]; }
+
+  function setUpZoom(svg) {
+    zoomer = d3.zoom()
+      .scaleExtent(scaleLimits())
+      .filter((e) => {
+        if (e.type === "wheel") {
+          if (mapActive || e.ctrlKey) return true;
+          showHint("Click the map, then scroll to zoom");
+          return false;
+        }
+        if (e.type.startsWith("touch")) return e.touches && e.touches.length >= 2;
+        return !e.ctrlKey && !e.button;
+      })
+      .on("start", (e) => {
+        if (!e.sourceEvent) return;
+        userTookControl();
+        mapEl.classList.add("is-grabbing");
+      })
+      .on("zoom", (e) => render(e.transform))
+      .on("end", () => mapEl.classList.remove("is-grabbing"));
+    svg.call(zoomer).on("dblclick.zoom", null);
+    // d3.zoom turns off browser touch scrolling; give one-finger page scrolling back.
+    svg.style("touch-action", "pan-y");
+
+    mapEl.addEventListener("pointerdown", () => { mapActive = true; mapEl.classList.add("is-active"); });
+    mapEl.addEventListener("pointerleave", () => { mapActive = false; mapEl.classList.remove("is-active"); });
+
+    const zoomBy = (factor) => {
+      userTookControl();
+      svg.transition().duration(reduceMotion ? 0 : 350).call(zoomer.scaleBy, factor);
+    };
+    document.getElementById("zoom-in").addEventListener("click", () => zoomBy(1.8));
+    document.getElementById("zoom-out").addEventListener("click", () => zoomBy(1 / 1.8));
+    document.getElementById("zoom-reset").addEventListener("click", () => {
+      stop();
+      flyTo(overviewView(true));
+      setPlacesVisible(true);
+    });
+  }
+
+  function userTookControl() {
+    // The visitor is exploring on their own: pause the tour and stop any camera move.
+    stop();
+    d3.select(svgEl).interrupt("fly");
+  }
+
   function build(world) {
     const svg = d3.select(svgEl);
     measure();
@@ -522,6 +620,7 @@
       .on("click", (e, d) => { stop(); goTo(STOPS.indexOf(d), { animateRoute: true }); })
       .on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); stop(); goTo(STOPS.indexOf(d)); } });
 
+    setUpZoom(svg);
     mapReady = true;
     apply(overviewView(false));
 
@@ -530,6 +629,7 @@
       clearTimeout(rt);
       rt = setTimeout(() => {
         measure();
+        zoomer.scaleExtent(scaleLimits());
         if (state.place) apply(pointViewFor(PLACES.find((p) => p.id === state.place).coords, 6800));
         else if (state.ended) apply(overviewView(true));
         else if (state.current >= 0) apply(stopView(state.current));

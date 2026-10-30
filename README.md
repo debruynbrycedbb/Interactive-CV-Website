@@ -1,6 +1,6 @@
 # Interactive CV — Bryce de Bruyn
 
-A single-page interactive CV: an animated world map of my journey (South Africa → Ghana → Tanzania → Singapore → France → the Netherlands → Spain), my creative portfolio, past projects (EasyA bachelor's thesis), work and volunteer experience, education, skills and contact details.
+A single-page interactive CV: an animated world map of my journey (South Africa → Ghana → Tanzania → Singapore → France → the Netherlands → England → Spain), my creative portfolio, past projects (EasyA bachelor's thesis), work and volunteer experience, education, skills and contact details.
 
 Plain HTML, CSS and JavaScript — no build step. Open `index.html` through any static server, or view it on GitHub Pages.
 

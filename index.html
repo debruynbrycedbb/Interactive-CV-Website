@@ -76,13 +76,25 @@
     <section class="journey" id="journey" aria-labelledby="journey-title">
       <div class="journey__head">
         <h2 id="journey-title">My journey</h2>
-        <p>Seven countries, from where I was born in South Africa to my Master's in Barcelona, Spain.</p>
+        <p>Eight countries, from where I was born in South Africa to my Master's in Barcelona, Spain.</p>
       </div>
 
       <div class="journey__stage">
-        <div class="map" id="map" role="img" aria-label="World map showing the countries Bryce has lived and studied in: South Africa, Ghana, Tanzania, Singapore, France, the Netherlands and Spain">
+        <div class="map" id="map" role="group" aria-label="World map showing the countries Bryce has lived and studied in: South Africa, Ghana, Tanzania, Singapore, France, the Netherlands, England and Spain">
           <svg id="map-svg"></svg>
           <p class="map__fallback" hidden>The map could not load. The timeline below lists every stop.</p>
+          <div class="map__zoom" aria-label="Map zoom">
+            <button class="ctl ctl--icon" type="button" id="zoom-in" aria-label="Zoom in">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            </button>
+            <button class="ctl ctl--icon" type="button" id="zoom-out" aria-label="Zoom out">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            </button>
+            <button class="ctl ctl--icon" type="button" id="zoom-reset" aria-label="Show the whole journey">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 8h11M8 2.5c-2 2-2 9 0 11M8 2.5c2 2 2 9 0 11" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+          </div>
+          <p class="map__hint" aria-live="polite"></p>
         </div>
 
         <article class="stop-card" id="stop-card" aria-live="polite">
@@ -309,7 +321,7 @@
               <h3>Master's — Digital Marketing and Social Media</h3>
               <p class="edu__school">LaSalle University, Barcelona, Spain</p>
             </div>
-            <button class="pin" type="button" data-stop="6">Show on map</button>
+            <button class="pin" type="button" data-stop="7">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">2019 – 2025</p>
@@ -321,11 +333,12 @@
             <button class="pin" type="button" data-stop="5">Show on map</button>
           </li>
           <li class="edu__item">
-            <p class="edu__years">Portsmouth University, England</p>
+            <p class="edu__years">2021 – 2022</p>
             <div>
               <h3>Additional Studies — Film &amp; Photography</h3>
+              <p class="edu__school">Portsmouth University, England</p>
             </div>
-            <button class="pin" type="button" data-place="england">Show on map</button>
+            <button class="pin" type="button" data-stop="6">Show on map</button>
           </li>
           <li class="edu__item">
             <p class="edu__years">2017 – 2019</p>
