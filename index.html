@@ -12,7 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <!-- Google Analytics 4 via the Google tag GTM-M8CN4MBB, Consent Mode v2.
+       Always loads with cookies off (anonymous, cookieless pings);
+       "Accept" in the cookie banner (consent.js) turns analytics cookies on. Ad storage stays off. -->
+  <script src="consent.js?v=2"></script>
   <script>
     /* Always open at the top of the page: drop any #section left in the address bar
        and stop the browser restoring an old scroll position. */
@@ -457,7 +461,11 @@
       <footer class="wrap foot-wrap">
         <div class="foot">
           <p>Bryce de Bruyn</p>
-          <a href="#hero">Back to top</a>
+          <div class="foot__links">
+            <a href="privacy.html">Privacy &amp; cookies</a>
+            <button class="foot__btn" type="button" data-consent-open>Cookie settings</button>
+            <a href="#hero">Back to top</a>
+          </div>
         </div>
       </footer>
     </section>
@@ -467,6 +475,6 @@
 
   <script src="assets/vendor/d3.min.js"></script>
   <script src="assets/vendor/topojson-client.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>

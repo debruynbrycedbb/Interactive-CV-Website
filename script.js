@@ -736,8 +736,8 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
 
   /* ----------------------------------------------------------
-     The site no longer uses analytics. Clear anything left behind
-     in this browser by the old Clarity setup.
+     Clear anything left behind in this browser by the old Clarity
+     setup. Analytics and the cookie banner now live in consent.js.
      ---------------------------------------------------------- */
   try { localStorage.removeItem("cv-consent"); } catch (_) {}
   ["_clck", "_clsk"].forEach((name) => {

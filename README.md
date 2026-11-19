@@ -9,6 +9,8 @@ Plain HTML, CSS and JavaScript — no build step. Open `index.html` through any 
 - `index.html` — page content (all CV text lives here and in the journey data at the top of `script.js`)
 - `styles.css` — design
 - `script.js` — journey map, timeline, menu and copy buttons
+- `consent.js` — cookie banner and Google Analytics 4 (Google tag `GTM-M8CN4MBB`, Consent Mode v2). The tag always loads with cookies off (anonymous, cookieless pings); "Accept" turns analytics cookies on, "Only essential" keeps them off. The choice is kept for 6 months; "Cookie settings" in the footer reopens the banner.
+- `privacy.html` — privacy & cookie statement (linked from the banner and the footer)
 - `assets/headshot.jpg` — homepage photo
 - `assets/easya-logo.png` — logo for the EasyA project in Past Projects
 - `assets/Bryce_de_Bruyn_CV.pdf` — the file behind every "Download CV" button
@@ -21,3 +23,7 @@ The portfolio section embeds https://bdbphotography.site. To change it, edit `da
 ## Past Projects
 
 The EasyA project embeds https://debruynbrycedbb.github.io/EasyA-DAO-Re-make/index.html. Edit `data-embed` on the `embed--project` figure in `index.html` to change it.
+
+## Cache busting
+
+`styles.css`, `script.js` and `consent.js` are loaded with `?v=2` in `index.html` and `privacy.html`. Raise the number on every release.
